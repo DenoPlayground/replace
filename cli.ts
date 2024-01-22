@@ -1,5 +1,6 @@
 import { parseArgs } from 'https://deno.land/std@0.212.0/cli/mod.ts';
 import { WalkEntry, walkSync } from 'https://deno.land/std@0.212.0/fs/mod.ts';
+import { green } from 'https://deno.land/std@0.212.0/fmt/colors.ts';
 import { parseString as parseRegExpString } from 'https://raw.githubusercontent.com/TypeScriptPlayground/std/main/src/regexp/mod.ts'
 
 const args = parseArgs<{
@@ -35,7 +36,7 @@ entries.forEach((entry) => {
   const newPath = oldPath.replace(pattern, args.replacer);
   const oldName = entry.isFile ? entry.name : '';
   const newName = oldName.replace(pattern, args.replacer);
-  console.log(oldPath + oldName, '->', newPath + newName);
+  console.log(green(oldPath + oldName), '->', green(newPath + newName));
   
   Deno.mkdirSync(newPath, {recursive: true});
   
